@@ -1,0 +1,1551 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Способности Юаня</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8fafc;
+            color: #334155;
+            line-height: 1.6;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+        
+        header {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            text-align: center;
+            width: 100%;
+            max-width: 600px;
+        }
+        
+        h1 {
+            color: #475569;
+            font-size: 28px;
+            margin-bottom: 10px;
+            display: inline-block;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #cbd5e1;
+        }
+
+        .section-title {
+            color: #475569;
+            font-size: 22px;
+            margin: 30px 0 15px 0;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #cbd5e1;
+            width: 100%;
+            max-width: 600px;
+            text-align: left;
+        }
+        
+        .abilities-container {
+            width: 100%;
+            max-width: 600px;
+        }
+        
+        .ability-card {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            margin-bottom: 20px;
+            overflow: hidden;
+            border-left: 4px solid #94a3b8;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .ability-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .ability-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px;
+            background-color: #f1f5f9;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+        
+        .ability-header:hover {
+            background-color: #e2e8f0;
+        }
+        
+        .ability-title {
+            font-weight: 600;
+            font-size: 18px;
+            color: #334155;
+            flex: 1;
+            display: flex;
+            align-items: center;
+        }
+        
+        .ability-icon {
+            margin-right: 10px;
+            font-size: 20px;
+            color: #64748b;
+        }
+        
+        .ability-level {
+            background-color: #e2e8f0;
+            padding: 5px 12px;
+            border-radius: 16px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #475569;
+        }
+        
+        .ability-description {
+            padding: 12px 16px;
+            font-size: 14px;
+            background-color: #f8fafc;
+            color: #475569;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .ability-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            padding: 16px;
+            background-color: #f8fafc;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .tag {
+            padding: 5px 10px;
+            border-radius: 16px;
+            font-size: 13px;
+            font-weight: 500;
+            background-color: #e2e8f0;
+            color: #475569;
+            display: flex;
+            align-items: center;
+        }
+        
+        .tag i {
+            margin-right: 5px;
+        }
+        
+        .ability-details {
+            padding: 16px;
+        }
+        
+        .ability-info {
+            margin-bottom: 10px;
+            font-size: 14px;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .ability-info b {
+            color: #475569;
+            font-weight: 600;
+            min-width: 120px;
+            display: inline-block;
+        }
+        
+        .ability-info span {
+            margin-left: 8px;
+        }
+        
+        .divider {
+            height: 1px;
+            background-color: #e2e8f0;
+            margin: 16px 0;
+        }
+        
+        .ability-effect {
+            padding: 16px;
+            background-color: #f1f5f9;
+            border-radius: 6px;
+            margin: 16px 0;
+            font-size: 14px;
+            line-height: 1.6;
+            color: #334155;
+        }
+        
+        .reaction-block {
+            background-color: #f1f5f9;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 16px;
+            margin: 16px 0;
+            position: relative;
+        }
+        
+        .reaction-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+            color: #475569;
+            font-weight: 600;
+        }
+        
+        .reaction-icon {
+            margin-right: 8px;
+            font-size: 18px;
+            color: #64748b;
+        }
+        
+        .reaction-trigger, .reaction-effect {
+            margin-bottom: 10px;
+            padding-left: 26px;
+            position: relative;
+            font-size: 14px;
+        }
+        
+        .reaction-trigger:before, .reaction-effect:before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 2px;
+            width: 16px;
+            height: 16px;
+            background-color: #94a3b8;
+            border-radius: 50%;
+        }
+        
+        .reaction-trigger:after, .reaction-effect:after {
+            content: "►";
+            position: absolute;
+            left: 3px;
+            top: 0;
+            color: white;
+            font-size: 12px;
+        }
+        
+        .highlight {
+            background-color: #e2e8f0;
+            padding: 2px 4px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+        
+        .option-block {
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #f8fafc;
+            border-radius: 6px;
+            border-left: 3px solid #cbd5e1;
+        }
+        
+        .option-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #475569;
+        }
+        
+        .ability-expandable {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .expanded {
+            display: block;
+        }
+        
+        .prerequisites {
+            background-color: #f1f5f9;
+            border-radius: 6px;
+            padding: 12px;
+            margin: 16px 0;
+        }
+        
+        .prerequisites-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            color: #475569;
+            font-weight: 600;
+        }
+        
+        .prerequisites-icon {
+            margin-right: 8px;
+            font-size: 16px;
+            color: #64748b;
+        }
+        
+        .benefits-list {
+            background-color: #f1f5f9;
+            border-radius: 6px;
+            padding: 12px;
+            margin: 16px 0;
+        }
+        
+        .benefits-list ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        
+        .benefits-list li {
+            padding: 5px 0;
+            position: relative;
+            padding-left: 20px;
+        }
+        
+        .benefits-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #10b981;
+            font-weight: bold;
+        }
+        
+        .feature-block {
+            background-color: #f1f5f9;
+            border-radius: 6px;
+            padding: 12px;
+            margin: 16px 0;
+        }
+        
+        .feature-title {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #475569;
+        }
+        
+        .clarification {
+            background-color: #fef3c7;
+            border-radius: 6px;
+            padding: 12px;
+            margin: 16px 0;
+            border-left: 3px solid #f59e0b;
+        }
+        
+        .clarification-title {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #92400e;
+        }
+        
+        .results-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+        }
+        
+        .results-table th, .results-table td {
+            border: 1px solid #e2e8f0;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        
+        .results-table th {
+            background-color: #f1f5f9;
+            font-weight: 600;
+            color: #475569;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @media (max-width: 400px) {
+            body {
+                padding: 15px;
+            }
+            
+            .ability-header {
+                padding: 14px;
+            }
+            
+            .ability-title {
+                font-size: 16px;
+            }
+            
+            .ability-level {
+                font-size: 13px;
+                padding: 4px 10px;
+            }
+            
+            .ability-info b {
+                min-width: 100px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="content-wrapper">
+        <header>
+            <h1><i class="fas fa-user-circle"></i> Способности Юаня</h1>
+        </header>
+
+        <h2 class="section-title">ЧЕРТЫ НАРОДА И СПОСОБНОСТИ</h2>
+
+        <div class="abilities-container">
+            <div class="ability-card">
+                <div class="ability-header" onclick="toggleAbility(this)">
+                    <div class="ability-title">
+                        <i class="ability-icon fas fa-eye"></i> Сумеречное зрение
+                    </div>
+                    <div class="ability-level">Особая</div>
+                </div>
+                
+                <div class="ability-expandable">
+                    <div class="ability-tags">
+                        <div class="tag"><i class="fas fa-eye"></i> Зрение</div>
+                    </div>
+                    
+                    <div class="ability-details">
+                        <div class="ability-effect">
+                            <i class="fas fa-quote-left" style="color: #94a3b8; margin-right: 5px;"></i>
+                            Вы можете видеть при тусклом свете, как если бы это был яркий свет, и вы игнорируете состояние скрыт из-за тусклого света.
+                            <i class="fas fa-quote-right" style="color: #94a3b8; margin-left: 5px;"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ability-card">
+                <div class="ability-header" onclick="toggleAbility(this)">
+                    <div class="ability-title">
+                        <i class="ability-icon fas fa-history"></i> Святилище Самсаран
+                    </div>
+                    <div class="ability-level">Родословная</div>
+                </div>
+                
+                <div class="ability-expandable">
+                    <div class="ability-tags">
+                        <div class="tag"><i class="fas fa-redo"></i> Реакция</div>
+                        <div class="tag"><i class="fas fa-calendar-day"></i> 1/день</div>
+                    </div>
+                    
+                    <div class="ability-details">
+                        <div class="reaction-block">
+                            <div class="reaction-header">
+                                <i class="reaction-icon fas fa-exchange-alt"></i> Реакция
+                            </div>
+                            
+                            <div class="reaction-trigger">
+                                <span class="highlight">Триггер:</span> Вы собираетесь попытаться сделать проверку Вспомнить информацию
+                            </div>
+                            
+                            <div class="reaction-effect">
+                                <span class="highlight">Эффект:</span> Ваши прошлые воплощения возрождались в святилищах на севере Цзы Ха, и у вас есть воспоминания о том, как вас учили концентрироваться и сосредотачиваться в течение длительных периодов времени. Ваши смутные воспоминания также открывают полезные писания в книгах, которые жадно поглощали ваши прошлые жизни. Вы получаете действие Tap the Past.
+                            </div>
+                        </div>
+                        
+                        <div class="ability-effect">
+                            <i class="fas fa-quote-left" style="color: #94a3b8; margin-right: 5px;"></i>
+                            Вы концентрируетесь на проблесках прошлой жизни, чтобы найти воспоминание о фолианте или применимый урок из вашего прошлого. Вы бросаете второй раз и используете более высокий результат. Если вы выкидываете критическую неудачу, вы вместо этого получаете неудачу. Если вы выкидываете успех, вы вместо этого получаете критический успех.
+                            <i class="fas fa-quote-right" style="color: #94a3b8; margin-left: 5px;"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ability-card">
+                <div class="ability-header" onclick="toggleAbility(this)">
+                    <div class="ability-title">
+                        <i class="ability-icon fas fa-redo-alt"></i> Все повторится вновь
+                    </div>
+                    <div class="ability-level">Черта 1</div>
+                </div>
+                
+                <div class="ability-expandable">
+                    <div class="ability-tags">
+                        <div class="tag"><i class="fas fa-dice"></i> Удача</div>
+                        <div class="tag"><i class="fas fa-brain"></i> Ментальный</div>
+                        <div class="tag"><i class="fas fa-history"></i> Самсаранец</div>
+                    </div>
+                    
+                    <div class="ability-details">
+                        <div class="reaction-block">
+                            <div class="reaction-header">
+                                <i class="reaction-icon fas fa-exchange-alt"></i> Реакция
+                            </div>
+                            
+                            <div class="reaction-trigger">
+                                <span class="highlight">Триггер:</span> Вы проваливаете или критически проваливаете спасбросок Воли против эмоционального эффекта
+                            </div>
+                            
+                            <div class="reaction-effect">
+                                <span class="highlight">Частота:</span> 1 раз в день
+                            </div>
+                        </div>
+                        
+                        <div class="ability-effect">
+                            <i class="fas fa-quote-left" style="color: #94a3b8; margin-right: 5px;"></i>
+                            Даже перед лицом тяжёлых испытаний вы находите утешение в мысли, что это чувство мимолётно — всё лишь часть бесконечного цикла. Вы можете перебросить спасбросок, вызвавший срабатывание, с +1 бонусом статуса. Вы должны использовать второй результат, даже если он хуже.
+                            <i class="fas fa-quote-right" style="color: #94a3b8; margin-left: 5px;"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ability-card">
+                <div class="ability-header" onclick="toggleAbility(this)">
+                    <div class="ability-title">
+                        <i class="ability-icon fas fa-infinity"></i> И повторится вновь
+                    </div>
+                    <div class="ability-level">Черта 5</div>
+                </div>
+                
+                <div class="ability-expandable">
+                    <div class="ability-tags">
+                        <div class="tag"><i class="fas fa-history"></i> Самсаранец</div>
+                    </div>
+                    
+                    <div class="ability-details">
+                        <div class="ability-info">
+                            <b><i class="fas fa-tasks"></i> Требование:</b> <span>Черта "Всё повторится вновь"</span>
+                        </div>
+                        
+                        <div class="ability-info">
+                            <b><i class="fas fa-ban"></i> Ограничение:</b> <span>1 раз в день</span>
+                        </div>
+                        
+                        <div class="divider"></div>
+                        
+                        <div class="ability-effect">
+                            <i class="fas fa-quote-left" style="color: #94a3b8; margin-right: 5px;"></i>
+                            Вы научились отпускать большинство тревог и двигаться дальше. Теперь триггер для "Всё повторится вновь" изменяется на: "Вы проваливаете или критически проваливаете спасбросок Выносливости, Реакции или Воли".
+                            <i class="fas fa-quote-right" style="color: #94a3b8; margin-left: 5px;"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ability-card">
+                <div class="ability-header" onclick="toggleAbility(this)">
+                    <div class="ability-title">
+                        <i class="ability-icon fas fa-tint"></i> Кровь жизни
+                    </div>
+                    <div class="ability-level">Черта 9</div>
+                </div>
+                
+                <div class="ability-expandable">
+                    <div class="ability-tags">
+                        <div class="tag"><i class="fas fa-heartbeat"></i> Исцеление</div>
+                        <div class="tag"><i class="fas fa-history"></i> Самсаранец</div>
+                    </div>
+                    
+                    <div class="ability-details">
+                        <div class="ability-effect">
+                            <i class="fas fa-quote-left" style="color: #94a3b8; margin-right: 5px;"></i>
+                            Ваш путь к просветлению наполнил вашу кровь почти бессмертными свойствами, позволяя исцелять других. Вы жертвуете часть своей жизненной силы, чтобы исцелить другое живое существо по своему выбору, находящееся рядом с вами, покрывая его раны своей кровью.
+                            <i class="fas fa-quote-right" style="color: #94a3b8; margin-left: 5px;"></i>
+                        </div>
+                        
+                        <div class="ability-info">
+                            <b><i class="fas fa-heart-crack"></i> Вы теряете:</b> <span>3d6 хитов, плюс дополнительные 1d6 хитов за каждые 2 уровня выше 10-го (например, на 12-м уровне — 4d6, на 14-м — 5d6 и т.д.). Этот урон нельзя уменьшить, предотвратить или игнорировать.</span>
+                        </div>
+                        
+                        <div class="ability-info">
+                            <b><i class="fas fa-heart"></i> Цель получает:</b> <span>Количество хитов, равное потерянным вами.</span>
+                        </div>
+                        
+                        <div class="ability-info">
+                            <b><i class="fas fa-shield-alt"></i> Ограничение:</b> <span>Существа, исцеленные таким способом, становятся временно невосприимчивы к Крови Жизни на 24 часа.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ability-card">
+                <div class="ability-header" onclick="toggleAbility(this)">
+                    <div class="ability-title">
+                        <i class="ability-icon fas fa-water"></i> Вода в воду
+                    </div>
+                    <div class="ability-level">Черта 13</div>
+                </div>
+                
+                <div class="ability-expandable">
+                    <div class="ability-tags">
+                        <div class="tag"><i class="fas fa-history"></i> Самсаранец</div>
+                        <div class="tag"><i class="fas fa-tint"></i> Вода</div>
+                    </div>
+                    
+                    <div class="ability-details">
+                        <div class="ability-effect">
+                            <i class="fas fa-quote-left" style="color: #94a3b8; margin-right: 5px;"></i>
+                            Вы позволяете своему телу раствориться в воде, а затем воссоздаёте физическую форму в другом месте. Вы можете использовать заклинание Дверь в пространстве как врождённое оккультное заклинание дважды в день; это заклинание также получает черту вода.
+                            <i class="fas fa-quote-right" style="color: #94a3b8; margin-left: 5px;"></i>
+                        </div>
+                        
+                        <div class="ability-effect">
+                            <i class="fas fa-quote-left" style="color: #94a3b8; margin-right: 5px;"></i>
+                            Если вы применяете это заклинание, стоя в воде глубиной хотя бы по щиколотку, вам не нужно произносить заклинания или делать жесты (что обычно предотвращает реакции, такие как Ответный Удар), и заклинание получает черту скрытное, так как вы просто растворяетесь в воде без малейшего всплеска.
+                            <i class="fas fa-quote-right" style="color: #94a3b8; margin-left: 5px;"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+          <!-- И это пройдёт (новая черта) -->
+            <div class="ability-card">
+                <div class="ability-header" onclick="toggleAbility(this)">
+                    <div class="ability-title">
+                        <i class="ability-icon fas fa-hourglass-half"></i> И это пройдёт
+                    </div>
+                    <div class="ability-level">Черта 17</div>
+                </div>
+                
+                <div class="ability-expandable">
+                    <div class="ability-tags">
+                        <div class="tag"><i class="fas fa-history"></i> Самсаран</div>
+                        <div class="tag"><i class="fas fa-redo-alt"></i> Удача</div>
+                    </div>
+                    
+                    <div class="ability-details">
+                        <div class="prerequisites">
+                            <div class="prerequisites-header">
+                                <i class="prerequisites-icon fas fa-tasks"></i> Предварительные условия
+                            </div>
+                            <div>И повторится вновь</div>
+                        </div>
+                        
+                        <div class="ability-effect">
+                            <i class="fas fa-quote-left" style="color: #94a3b8; margin-right: 5px;"></i>
+                            Смертные тревоги для вас настолько ничтожны, что вы оставляете их позади, стоит им едва показаться на вашем пути. Вы можете использовать <span class="highlight">И повторится вновь</span> один раз в час вместо одного раза в день.
+                            <i class="fas fa-quote-right" style="color: #94a3b8; margin-left: 5px;"></i>
+                        </div>
+                        
+                        <div class="feature-block">
+                            <div class="feature-title">Изменение частоты:</div>
+                            <ul style="list-style-type: none; padding-left: 0;">
+                                <li><i class="fas fa-check-circle" style="color: #5f6caf; margin-right: 8px;"></i>Было: 1 раз в день</li>
+                                <li><i class="fas fa-check-circle" style="color: #5f6caf; margin-right: 8px;"></i>Стало: 1 раз в час</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="benefits-list">
+                            <ul>
+                                <li>Значительно более частое использование способности</li>
+                                <li>Позволяет чаще перебрасывать спасброски</li>
+                                <li>Отражает просветлённое отношение к мирским заботам</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+          <h2 class="section-title">ЧЕРТЫ НАВЫКОВ</h2>
+      <div class="abilities-container">
+            <!-- Мирской медик -->
+            <div class="ability-card">
+                <div class="ability-header" onclick="toggleAbility(this)">
+                    <div class="ability-title">
+                        <i class="ability-icon fas fa-user-md"></i> Мирской медик
+                    </div>
+                    <div class="ability-level">Происхождение</div>
+                </div>
+                
+                <div class="ability-expandable">
+                    <div class="ability-tags">
+                        <div class="tag"><i class="fas fa-briefcase-medical"></i> Медицина</div>
+                        <div class="tag"><i class="fas fa-book-medical"></i> Анатомия</div>
+                    </div>
+                    
+                    <div class="ability-details">
+                        <div class="ability-effect">
+                            <i class="fas fa-quote-left" style="color: #94a3b8; margin-right: 5px;"></i>
+                            Законы Смертности научили вас отвергать богов, но вы сами видели, как опасно бывает обходиться без исцеляющей магии. В результате вы погрузились в изучение медицины, чтобы спасать жизни, не спасая души.
+                            <i class="fas fa-quote-right" style="color: #94a3b8; margin-left: 5px;"></i>
+                        </div>
+                        
+                        <div class="ability-info">
+                            <b><i class="fas fa-chart-line"></i> Характеристики:</b> 
+                            <span>Выберите два повышения характеристик. Одно должно быть Ловкость или Мудрость, а другое свободное.</span>
+                        </div>
+                        
+                        <div class="benefits-list">
+                            <ul>
+                                <li>↑ Ловкость</li>
+                                <li>↑ Свободное</li>
+                                <li>Обучен Медицине</li>
+                                <li>Обучен Анатомии</li>
+                                <li>Боевая медицина</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Быстрый прыжок -->
+            <div class="ability-card">
+                <div class="ability-header" onclick="toggleAbility(this)">
+                    <div class="ability-title">
+                        <i class="ability-icon fas fa-running"></i> Быстрый прыжок
+                    </div>
+                    <div class="ability-level">Уровень 2</div>
+                </div>
+                
+                <div class="ability-expandable">
+                    <div class="ability-tags">
+                        <div class="tag"><i class="fas fa-globe"></i> Общая</div>
+                        <div class="tag"><i class="fas fa-dumbbell"></i> Навык</div>
+                    </div>
+                    
+                    <div class="ability-details">
+                        <div class="prerequisites">
+                            <div class="prerequisites-header">
+                                <i class="prerequisites-icon fas fa-tasks"></i> Предварительные условия
+                            </div>
+                            <div>обучен Атлетике</div>
+                        </div>
+                        
+                        <div class="ability-effect">
+                            <i class="fas fa-quote-left" style="color: #94a3b8; margin-right: 5px;"></i>
+                            Вы можете использовать Прыжок в высоту и Прыжок в длину как одиночное действие, вместо 2 действий. Если вы так делаете, то не выполняете начальное Перемещение (и вы не получите провал, если не Переместитесь на 10 футов).
+                            <i class="fas fa-quote-right" style="color: #94a3b8; margin-left: 5px;"></i>
+                        </div>
+                        
+                        <div class="benefits-list">
+                            <ul>
+                                <li>Прыжок в высоту и Прыжок в длину за 1 действие</li>
+                                <li>Не считается за Перемещение</li>
+                                <li>Не будет провала</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Обучен навыку Атлетика -->
+            <div class="ability-card">
+                <div class="ability-header" onclick="toggleAbility(this)">
+                    <div class="ability-title">
+                        <i class="ability-icon fas fa-dumbbell"></i> Обучен навыку Атлетика
+                    </div>
+                    <div class="ability-level">Уровень 4</div>
+                </div>
+            </div>
+
+            <!-- Символ паломника -->
+            <div class="ability-card">
+                <div class="ability-header" onclick="toggleAbility(this)">
+                    <div class="ability-title">
+                        <i class="ability-icon fas fa-cross"></i> Символ паломника
+                    </div>
+                    <div class="ability-level">Уровень 6</div>
+                </div>
+                
+                <div class="ability-expandable">
+                    <div class="ability-tags">
+                        <div class="tag"><i class="fas fa-globe"></i> Общая</div>
+                        <div class="tag"><i class="fas fa-pray"></i> Навык</div>
+                    </div>
+                    
+                    <div class="ability-details">
+                        <div class="prerequisites">
+                            <div class="prerequisites-header">
+                                <i class="prerequisites-icon fas fa-tasks"></i> Предварительные условия
+                            </div>
+                            <div>обучен Религии</div>
+                        </div>
+                        
+                        <div class="ability-effect">
+                            <i class="fas fa-quote-left" style="color: #94a3b8; margin-right: 5px;"></i>
+                            Религиозный оберег позволяет вам ходить перед противником при одинаковой инициативе. Вы носите небольшой символ защиты из священного места вашей веры, или вы в таком месте прикоснулись своим религиозным символом к реликвии или алтарю. Пока этот символ у вас, когда ваша инициатива одинаковая с противником, то вы ходите первыми.
+                            <i class="fas fa-quote-right" style="color: #94a3b8; margin-left: 5px;"></i>
+                        </div>
+                        
+                        <div class="feature-block">
+                            <div class="feature-title">Особенность:</div>
+                            <div>Если вы выбираете эту способность на 1-м уровне, то получаете свой символ паломника бесплатно. В качестве альтернативы, если у вас есть религиозный символ, то он уже сонастроен, как описано выше.</div>
+                        </div>
+                        
+                        <div class="ability-info">
+                            <b><i class="fas fa-cog"></i> Создание символа:</b> 
+                            <span>Если вы выбираете эту способность на позднем уровне, или если вы теряете свой символ паломника, то вы должны купить или Создать замену и сонастроить его в священном месте. Такой символ обычно стоит как минимум 2 см и сонастройка занимает 10 минут молитв и требует успешной проверки Религии с КС 20.</span>
+                        </div>
+                        
+                        <div class="benefits-list">
+                            <ul>
+                                <li>При равной инициативе хожу первее</li>
+                                <li>Создание Символа бога КС 20</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Подъем разгибом -->
+            <div class="ability-card">
+                <div class="ability-header" onclick="toggleAbility(this)">
+                    <div class="ability-title">
+                        <i class="ability-icon fas fa-user-injured"></i> Подъем разгибом
+                    </div>
+                    <div class="ability-level">Уровень 8</div>
+                </div>
+                
+                <div class="ability-expandable">
+                    <div class="ability-tags">
+                        <div class="tag"><i class="fas fa-globe"></i> Общая</div>
+                        <div class="tag"><i class="fas fa-acrobatics"></i> Навык</div>
+                    </div>
+                    
+                    <div class="ability-details">
+                        <div class="prerequisites">
+                            <div class="prerequisites-header">
+                                <i class="prerequisites-icon fas fa-tasks"></i> Предварительные условия
+                            </div>
+                            <div>мастер Акробатики</div>
+                        </div>
+                        
+                        <div class="ability-effect">
+                            <i class="fas fa-quote-left" style="color: #94a3b8; margin-right: 5px;"></i>
+                            Вы грациозно двигаетесь в полете и можете выполнять удивительные воздушные трюки. Вы получаете бонус обстоятельства +2 к проверкам Акробатики на Маневрирование в полете и можете объединять 2 маневра в одиночное действие, как например изменять направление на противоположное при крутом подъеме или спуске, или зависать при штормовом ветре. КС проверки Акробатики равен КС наиболее сложного маневра +5. Если вы легенда Акробатики, то можете объединить 3 таких маневра в одиночное действие; КС проверки Акробатики равен КС наиболее сложного маневра +10. Независимо от сочетания, эти маневры редко позволяют вам двигаться быстрее вашей Скорости полета.
+                            <i class="fas fa-quote-right" style="color: #94a3b8; margin-left: 5px;"></i>
+                        </div>
+                        
+                        <div class="benefits-list">
+                            <ul>
+                                <li>Подъем Свободным действием</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Непрерывное выздоровление -->
+            <div class="ability-card">
+                <div class="ability-header" onclick="toggleAbility(this)">
+                    <div class="ability-title">
+                        <i class="ability-icon fas fa-heartbeat"></i> Непрерывное выздоровление
+                    </div>
+                    <div class="ability-level">Уровень 10</div>
+                </div>
+                
+                <div class="ability-expandable">
+                    <div class="ability-tags">
+                        <div class="tag"><i class="fas fa-globe"></i> Общая</div>
+                        <div class="tag"><i class="fas fa-briefcase-medical"></i> Навык</div>
+                    </div>
+                    
+                    <div class="ability-details">
+                        <div class="prerequisites">
+                            <div class="prerequisites-header">
+                                <i class="prerequisites-icon fas fa-tasks"></i> Предварительные условия
+                            </div>
+                            <div>эксперт Медицины</div>
+                        </div>
+                        
+                        <div class="ability-effect">
+                            <i class="fas fa-quote-left" style="color: #94a3b8; margin-right: 5px;"></i>
+                            Вы фанатично следите за выздоровлением пациента, чтобы ускорить лечение. Когда вы используете Лечение ран, ваш пациент становится иммунным только на 10 минут вместо 1 часа. Это применяется только к вашим активностям Лечение ран, а не к другим, которые получает пациент.
+                            <i class="fas fa-quote-right" style="color: #94a3b8; margin-left: 5px;"></i>
+                        </div>
+                        
+                        <div class="benefits-list">
+                            <ul>
+                                <li>Иммунитет к Лечению ран на 10 мин.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Освятить воду -->
+            <div class="ability-card">
+                <div class="ability-header" onclick="toggleAbility(this)">
+                    <div class="ability-title">
+                        <i class="ability-icon fas fa-vial"></i> Освятить воду
+                    </div>
+                    <div class="ability-level">Уровень 12</div>
+                </div>
+                
+                <div class="ability-expandable">
+                    <div class="ability-tags">
+                        <div class="tag"><i class="fas fa-globe"></i> Общая</div>
+                        <div class="tag"><i class="fas fa-pray"></i> Навык</div>
+                    </div>
+                    
+                    <div class="ability-details">
+                        <div class="prerequisites">
+                            <div class="prerequisites-header">
+                                <i class="prerequisites-icon fas fa-tasks"></i> Предварительные условия
+                            </div>
+                            <div>мастер Религии, доброе или злое божество</div>
+                        </div>
+                        
+                        <div class="ability-effect">
+                            <i class="fas fa-quote-left" style="color: #94a3b8; margin-right: 5px;"></i>
+                            Вы наполняете воду благословением вашего божества. Выберите емкость с водой находящийся на вас, и имеющий легкую Массу. На 1 раунд, если вы или союзник бросаете эту емкость во врага, она имеет эффекты урона как от Святая вода / Предмет 1 (если вы последователь доброго божества) или Нечестивая вода / Предмет 1 (если вы последователь злого божества). Недолговечная сила воды не придает ей никакой ценности, не позволяет использовать ее для покрытия стоимости заклинания или ритуала, и так далее. Если вы легенда Религии, то вместо 1 емкости можете освятить 3 емкости, удерживаемые вами или союзниками в пределах вашей досягаемости.
+                            <i class="fas fa-quote-right" style="color: #94a3b8; margin-left: 5px;"></i>
+                        </div>
+                        
+                        <div class="clarification">
+                            <div class="clarification-title">Уточнение:</div>
+                            <div>Для определения бонуса атаки с "Освятить воду", используйте свое мастерство простого оружия, когда бросаете емкость с водой. Если вы даете емкость для броска другому персонажу, то вместо этого они используют свое мастерство с импровизированным оружием.</div>
+                        </div>
+                        
+                        <div class="benefits-list">
+                            <ul>
+                                <li>1 действие</li>
+                                <li>1D6 добром +1 брызгами</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Проповедование -->
+            <div class="ability-card">
+                <div class="ability-header" onclick="toggleAbility(this)">
+                    <div class="ability-title">
+                        <i class="ability-icon fas fa-praying-hands"></i> Проповедование
+                    </div>
+                    <div class="ability-level">Уровень 14</div>
+                </div>
+                
+                <div class="ability-expandable">
+                    <div class="ability-tags">
+                        <div class="tag"><i class="fas fa-volume-up"></i> Слуховой</div>
+                        <div class="tag"><i class="fas fa-language"></i> Языковой</div>
+                        <div class="tag"><i class="fas fa-brain"></i> Ментальный</div>
+                        <div class="tag"><i class="fas fa-globe"></i> Общая</div>
+                        <div class="tag"><i class="fas fa-comments"></i> Навык</div>
+                    </div>
+                    
+                    <div class="ability-details">
+                        <div class="prerequisites">
+                            <div class="prerequisites-header">
+                                <i class="prerequisites-icon fas fa-tasks"></i> Предварительные условия
+                            </div>
+                            <div>мастер Дипломатии, вы последователь божества или философии</div>
+                        </div>
+                        
+                        <div class="ability-effect">
+                            <i class="fas fa-quote-left" style="color: #94a3b8; margin-right: 5px;"></i>
+                            Вы указываете на подробность, которая неопровержимо поддерживает вашу веру, заставляя разум слушателя идти кругом. Сделайте проверку Дипломатии и сравните результат с КС Воли одной цели, которая может слышать вас и понимает ваш язык; после этого цель временно иммунна на 1 день к "Проповедованию" в отношении вашего божества или философии. Существо, которое уже согласно с вами, остается невредимым, и по усмотрению Мастера, цель, которая в результате спора искренне меняет свою точку зрения, чтобы поддержать вашу веру, также остается невредимой.
+                            <i class="fas fa-quote-right" style="color: #94a3b8; margin-left: 5px;"></i>
+                        </div>
+                        
+                        <table class="results-table">
+                            <thead>
+                                <tr>
+                                    <th>Результат</th>
+                                    <th>Эффект</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><b>Критический успех</b></td>
+                                    <td>Цель получает состояние одурманен 2 на 1 раунд</td>
+                                </tr>
+                                <tr>
+                                    <td><b>Успех</b></td>
+                                    <td>Цель получает состояние одурманен 1 на 1 раунд</td>
+                                </tr>
+                                <tr>
+                                    <td><b>Провал</b></td>
+                                    <td>Цель невредима</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        <div class="benefits-list">
+                            <ul>
+                                <li>КС Воли к Дипломатии</li>
+                                <li>Иммунитет 1 день</li>
+                                <li>Одурманен 2/1/невредима</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+          <h2 class="section-title">ОБЩИЕ ЧЕРТЫ</h2>
+
+
+<div class="abilities-container">
+            <!-- Живучесть -->
+            <div class="ability-card">
+                <div class="ability-header" onclick="toggleAbility(this)">
+                    <div class="ability-title">
+                        <i class="ability-icon fas fa-heart"></i> Живучесть
+                    </div>
+                    <div class="ability-level">Уровень 3</div>
+                </div>
+                
+                <div class="ability-expandable">
+                    <div class="ability-tags">
+                        <div class="tag"><i class="fas fa-globe"></i> Общая</div>
+                    </div>
+                    
+                    <div class="ability-details">
+                        <div class="ability-effect">
+                            <i class="fas fa-quote-left" style="color: #94a3b8; margin-right: 5px;"></i>
+                            Вы можете выдержать больше ударов, чем большинство. Увеличьте ваши максимальные Очки Здоровья на значение вашего уровня. Ваш КС проверок восстановления становится равным 9 + ваше значения состояния при смерти (Проверки восстановления).
+                            <i class="fas fa-quote-right" style="color: #94a3b8; margin-left: 5px;"></i>
+                        </div>
+                        
+                        <div class="benefits-list">
+                            <ul>
+                                <li>ОЗ + УЗ</li>
+                                <li>КС Восстановления 9+ при смерти</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Импровизация без тренировки -->
+            <div class="ability-card">
+                <div class="ability-header" onclick="toggleAbility(this)">
+                    <div class="ability-title">
+                        <i class="ability-icon fas fa-lightbulb"></i> Импровизация без тренировки
+                    </div>
+                    <div class="ability-level">Уровень 7</div>
+                </div>
+                
+                <div class="ability-expandable">
+                    <div class="ability-tags">
+                        <div class="tag"><i class="fas fa-globe"></i> Общая</div>
+                    </div>
+                    
+                    <div class="ability-details">
+                        <div class="ability-effect">
+                            <i class="fas fa-quote-left" style="color: #94a3b8; margin-right: 5px;"></i>
+                            Вы научились справляться с ситуациями, которые вам не по зубам. Ваш бонус мастерства для проверок навыков, которым вы не тренированы, равняется половине вашего уровня, вместо +0. Если вы 7-го уровня или выше, то вместо этого бонус увеличивается до значения вашего уровня. Это не позволяет вам использовать действия навыков, для которых требуется быть обученным.
+                            <i class="fas fa-quote-right" style="color: #94a3b8; margin-left: 5px;"></i>
+                        </div>
+                        
+                        <div class="benefits-list">
+                            <ul>
+                                <li>Бонус мастерства для проверок Навыков +УЗ</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Быстроногий -->
+            <div class="ability-card">
+                <div class="ability-header" onclick="toggleAbility(this)">
+                    <div class="ability-title">
+                        <i class="ability-icon fas fa-running"></i> Быстроногий
+                    </div>
+                    <div class="ability-level">Уровень 11</div>
+                </div>
+                
+                <div class="ability-expandable">
+                    <div class="ability-tags">
+                        <div class="tag"><i class="fas fa-globe"></i> Общая</div>
+                    </div>
+                    
+                    <div class="ability-details">
+                        <div class="ability-effect">
+                            <i class="fas fa-quote-left" style="color: #94a3b8; margin-right: 5px;"></i>
+                            Вы можете двигаться быстрее. Ваша Скорость увеличивается на 5 футов.
+                            <i class="fas fa-quote-right" style="color: #94a3b8; margin-left: 5px;"></i>
+                        </div>
+                        
+                        <div class="benefits-list">
+                            <ul>
+                                <li>Скорость +5 фут.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Быстро ползать -->
+            <div class="ability-card">
+                <div class="ability-header" onclick="toggleAbility(this)">
+                    <div class="ability-title">
+                        <i class="ability-icon fas fa-crawl"></i> Быстро ползать
+                    </div>
+                    <div class="ability-level">Уровень 13</div>
+                </div>
+                
+                <div class="ability-expandable">
+                    <div class="ability-tags">
+                        <div class="tag"><i class="fas fa-globe"></i> Общая</div>
+                    </div>
+                    
+                    <div class="ability-details">
+                        <div class="prerequisites">
+                            <div class="prerequisites-header">
+                                <i class="prerequisites-icon fas fa-tasks"></i> Предварительные условия
+                            </div>
+                            <div>Ловкость 16, Быстроногий</div>
+                        </div>
+                        
+                        <div class="ability-effect">
+                            <i class="fas fa-quote-left" style="color: #94a3b8; margin-right: 5px;"></i>
+                            Вы можете быстро перемещаться по земле. Вы можете Ползти (Crawl) вплоть до половины своей Скорости.
+                            <i class="fas fa-quote-right" style="color: #94a3b8; margin-left: 5px;"></i>
+                        </div>
+                        
+                        <div class="benefits-list">
+                            <ul>
+                                <li>Ползание до половины Скорости</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+          <h2 class="section-title">КЛАССОВЫЕ ЧЕРТЫ И ОСОБЕННОСТИ</h2>
+
+       <div class="abilities-container">
+            <!-- Посвящение домену -->
+            <div class="ability-card">
+                <div class="ability-header" onclick="toggleAbility(this)">
+                    <div class="ability-title">
+                        <i class="ability-icon fas fa-pray"></i> Посвящение домену
+                    </div>
+                    <div class="ability-level">Особенность</div>
+                </div>
+                
+                <div class="ability-expandable">
+                    <div class="ability-tags">
+                        <div class="tag"><i class="fas fa-pray"></i> Жрец</div>
+                    </div>
+                    
+                    <div class="ability-details">
+                        <div class="ability-effect">
+                            <i class="fas fa-quote-left" style="color: #94a3b8; margin-right: 5px;"></i>
+                            Ваше божество дарует специальное заклинание, относящееся к его силам. Выберите один домен, из описания вашего божества, который является предметом особого интереса для вас в вашей религии. Вы получаете начальное доменное заклинание этого домена, оно уникально для домена и недоступно другим жрецам. Все домены и доменные заклинания описаны в Таблица 8-2: Домены.
+                            <i class="fas fa-quote-right" style="color: #94a3b8; margin-left: 5px;"></i>
+                        </div>
+                        
+                        <div class="ability-effect">
+                            <i class="fas fa-quote-left" style="color: #94a3b8; margin-right: 5px;"></i>
+                            Доменные заклинания — это вид заклинаний фокусировки. Сотворение заклинания фокусировки стоит 1 Очко Фокусировки, и вы начинаете с 1 очком в запасе. Вы восполняете свой запас очков фокусировки во время ежедневных приготовлений, и можете восстановить 1 Очко Фокусировки тратя 10 минут на использование активности Сфокусироваться (Refocus), чтобы помолиться божеству или послужить его целям.
+                            <i class="fas fa-quote-right" style="color: #94a3b8; margin-left: 5px;"></i>
+                        </div>
+                        
+                        <div class="ability-effect">
+                            <i class="fas fa-quote-left" style="color: #94a3b8; margin-right: 5px;"></i>
+                            Заклинания фокусировки автоматически усиливаются до половины вашего уровня, округленного до большего целого. Они не требуют слоты заклинаний, и вы не можете сотворять их используя слоты заклинаний. Определенные способности могут давать вам больше заклинаний фокусировки и увеличивать запас очков фокусировки, однако запас ОФ не может быть более 3 очков. Полные правила по заклинаниям фокусировки описаны в разделе Заклинания фокусировки.
+                            <i class="fas fa-quote-right" style="color: #94a3b8; margin-left: 5px;"></i>
+                        </div>
+                        
+                        <div class="feature-block">
+                            <div class="feature-title">Особенность:</div>
+                            <div>Вы можете выбрать эту способность несколько раз, каждый раз выбирая другой домен и получая его доменное заклинание.</div>
+                        </div>
+                        
+                        <div class="benefits-list">
+                            <ul>
+                                <li>1 Доменное заклинание и 1 ОФ</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Исцеляющие руки -->
+            <div class="ability-card">
+                <div class="ability-header" onclick="toggleAbility(this)">
+                    <div class="ability-title">
+                        <i class="ability-icon fas fa-hands-heart"></i> Исцеляющие руки
+                    </div>
+                    <div class="ability-level">Черта 1</div>
+                </div>
+                
+                <div class="ability-expandable">
+                    <div class="ability-tags">
+                        <div class="tag"><i class="fas fa-pray"></i> Жрец</div>
+                    </div>
+                    
+                    <div class="ability-details">
+                        <div class="prerequisites">
+                            <div class="prerequisites-header">
+                                <i class="prerequisites-icon fas fa-tasks"></i> Предварительные условия
+                            </div>
+                            <div>исцеляющая Божественная сила</div>
+                        </div>
+                        
+                        <div class="ability-effect">
+                            <i class="fas fa-quote-left" style="color: #94a3b8; margin-right: 5px;"></i>
+                            Ваша позитивная энергия сильнее восстанавливает и наполняет жизнью. Когда вы сотворяете Исцеление / Закл. 1, вы бросаете d10 вместо d8.
+                            <i class="fas fa-quote-right" style="color: #94a3b8; margin-left: 5px;"></i>
+                        </div>
+                        
+                        <div class="benefits-list">
+                            <ul>
+                                <li>1D10</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Предотвращающее предостережение -->
+            <div class="ability-card">
+                <div class="ability-header" onclick="toggleAbility(this)">
+                    <div class="ability-title">
+                        <i class="ability-icon fas fa-eye"></i> Предотвращающее предостережение
+                    </div>
+                    <div class="ability-level">Черта 2</div>
+                </div>
+                
+                <div class="ability-expandable">
+                    <div class="ability-tags">
+                        <div class="tag"><i class="fas fa-pray"></i> Жрец</div>
+                    </div>
+                    
+                    <div class="ability-details">
+                        <div class="reaction-block">
+                            <div class="reaction-header">
+                                <i class="reaction-icon fas fa-exchange-alt"></i> Триггер
+                            </div>
+                            
+                            <div class="reaction-trigger">
+                                <span class="highlight">Триггер:</span> Вы совершаете спасбросок против опасности, но еще не сделали бросок
+                            </div>
+                        </div>
+                        
+                        <div class="ability-effect">
+                            <i class="fas fa-quote-left" style="color: #94a3b8; margin-right: 5px;"></i>
+                            Ваше божество дает вам небольшое прозрение, предупреждая вас об опасностях до того как они случатся. Вы получаете бонус обстоятельства +2 к спровоцировавшему спасброску.
+                            <i class="fas fa-quote-right" style="color: #94a3b8; margin-left: 5px;"></i>
+                        </div>
+                        
+                        <div class="benefits-list">
+                            <ul>
+                                <li>Свободным действием +2 к Спасброску</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Быстрое реагирование -->
+            <div class="ability-card">
+                <div class="ability-header" onclick="toggleAbility(this)">
+                    <div class="ability-title">
+                        <i class="ability-icon fas fa-running"></i> Быстрое реагирование
+                    </div>
+                    <div class="ability-level">Черта 4</div>
+                </div>
+                
+                <div class="ability-expandable">
+                    <div class="ability-tags">
+                        <div class="tag"><i class="fas fa-pray"></i> Жрец</div>
+                    </div>
+                    
+                    <div class="ability-details">
+                        <div class="reaction-block">
+                            <div class="reaction-header">
+                                <i class="reaction-icon fas fa-exchange-alt"></i> Триггер
+                            </div>
+                            
+                            <div class="reaction-trigger">
+                                <span class="highlight">Триггер:</span> ОЗ союзника снижено до 0
+                            </div>
+                        </div>
+                        
+                        <div class="ability-effect">
+                            <i class="fas fa-quote-left" style="color: #94a3b8; margin-right: 5px;"></i>
+                            Во время опасности, вы действуете быстро и эффективно, чтобы предоставить необходимую помощь. Вы делаете Перемещение к спровоцировавшему союзнику. Во время этого движения, вы получаете бонус обстоятельства +10 футов Скорости.
+                            <i class="fas fa-quote-right" style="color: #94a3b8; margin-left: 5px;"></i>
+                        </div>
+                        
+                        <div class="benefits-list">
+                            <ul>
+                                <li>При 0 ОЗ у союзника +10 фут. Скорость</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Магические руки -->
+            <div class="ability-card">
+                <div class="ability-header" onclick="toggleAbility(this)">
+                    <div class="ability-title">
+                        <i class="ability-icon fas fa-magic"></i> Магические руки
+                    </div>
+                    <div class="ability-level">Черта 6</div>
+                </div>
+                
+                <div class="ability-expandable">
+                    <div class="ability-tags">
+                        <div class="tag"><i class="fas fa-pray"></i> Жрец</div>
+                    </div>
+                    
+                    <div class="ability-details">
+                        <div class="prerequisites">
+                            <div class="prerequisites-header">
+                                <i class="prerequisites-icon fas fa-tasks"></i> Предварительные условия
+                            </div>
+                            <div>Исцеляющие руки / 1</div>
+                        </div>
+                        
+                        <div class="ability-effect">
+                            <i class="fas fa-quote-left" style="color: #94a3b8; margin-right: 5px;"></i>
+                            Благословение вашего божества усиливает ваши исцеляющие способности, заставляя ваше обычное лечение работать как по волшебству. Когда вы успешно совершаете проверку Медицины для Лечение ран, то ваше действие получает признак сакральный и вы вылечиваете максимальное количество для 2d8 (или для 4d8 при крит.успехе). Если у вас есть умение, которое добавляет дополнительные кости к Лечение ран, то их вы бросаете как обычно.
+                            <i class="fas fa-quote-right" style="color: #94a3b8; margin-left: 5px;"></i>
+                        </div>
+                        
+                        <div class="benefits-list">
+                            <ul>
+                                <li>Медицина 16 ХП/32 ХП</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Совершенствование в домене -->
+            <div class="ability-card">
+                <div class="ability-header" onclick="toggleAbility(this)">
+                    <div class="ability-title">
+                        <i class="ability-icon fas fa-gem"></i> Совершенствование в домене
+                    </div>
+                    <div class="ability-level">Черта 8</div>
+                </div>
+                
+                <div class="ability-expandable">
+                    <div class="ability-tags">
+                        <div class="tag"><i class="fas fa-pray"></i> Жрец</div>
+                    </div>
+                    
+                    <div class="ability-details">
+                        <div class="prerequisites">
+                            <div class="prerequisites-header">
+                                <i class="prerequisites-icon fas fa-tasks"></i> Предварительные условия
+                            </div>
+                            <div>Посвящение домену (Domain Initiate) / 1</div>
+                        </div>
+                        
+                        <div class="ability-effect">
+                            <i class="fas fa-quote-left" style="color: #94a3b8; margin-right: 5px;"></i>
+                            Ваше обучение или молитвы открыли более глубокие секреты домена вашего божества. Вы получаете продвинутое заклинание одного домена, который вы знаете (как описано в Таблица 8-2: Домены). Увеличьте количество Очков Фокусировки в запасе на 1.
+                            <i class="fas fa-quote-right" style="color: #94a3b8; margin-left: 5px;"></i>
+                        </div>
+                        
+                        <div class="feature-block">
+                            <div class="feature-title">Особенность:</div>
+                            <div>Вы можете выбрать эту способность несколько раз. Каждый раз, вы должны выбрать другое продвинутое заклинание из другого домена, в котором у вас есть начальное заклинание.</div>
+                        </div>
+                        
+                        <div class="benefits-list">
+                            <ul>
+                                <li>2-е Доменное заклинание и 1 ОФ</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Героическое восстановление -->
+            <div class="ability-card">
+                <div class="ability-header" onclick="toggleAbility(this)">
+                    <div class="ability-title">
+                        <i class="ability-icon fas fa-shield-heart"></i> Героическое восстановление
+                    </div>
+                    <div class="ability-level">Черта 10</div>
+                </div>
+                
+                <div class="ability-expandable">
+                    <div class="ability-tags">
+                        <div class="tag"><i class="fas fa-hat-wizard"></i> Метамагия</div>
+                        <div class="tag"><i class="fas fa-brain"></i> Концентрация</div>
+                        <div class="tag"><i class="fas fa-pray"></i> Жрец</div>
+                    </div>
+                    
+                    <div class="ability-details">
+                        <div class="prerequisites">
+                            <div class="prerequisites-header">
+                                <i class="prerequisites-icon fas fa-tasks"></i> Предварительные условия
+                            </div>
+                            <div>исцеляющая Божественная сила, доброе мировоззрение</div>
+                        </div>
+                        
+                        <div class="ability-effect">
+                            <i class="fas fa-quote-left" style="color: #94a3b8; margin-right: 5px;"></i>
+                            Ваша восстанавливающая сила бодрит исцеленного. Если ваше следующее действие - сотворять Исцеление / Закл. 1 выбрав целью 1 живое существо и цель восстанавливает ОЗ от заклинания, она еще получает три бонуса до конца своего следующего хода:
+                            <i class="fas fa-quote-right" style="color: #94a3b8; margin-left: 5px;"></i>
+                        </div>
+                        
+                        <div class="benefits-list">
+                            <ul>
+                                <li>бонус состояния 5 футов к Скорости</li>
+                                <li>бонус состояния +1 к броскам атаки</li>
+                                <li>бонус состояния +1 к броскам урона</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="benefits-list">
+                            <ul>
+                                <li>1 действие</li>
+                                <li>1 раунд</li>
+                                <li>+5 Скорость</li>
+                                <li>+1 Атака</li>
+                                <li>+1 КУ</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Защитное восстановление -->
+            <div class="ability-card">
+                <div class="ability-header" onclick="toggleAbility(this)">
+                    <div class="ability-title">
+                        <i class="ability-icon fas fa-shield-alt"></i> Защитное восстановление
+                    </div>
+                    <div class="ability-level">Черта 12</div>
+                </div>
+                
+                <div class="ability-expandable">
+                    <div class="ability-tags">
+                        <div class="tag"><i class="fas fa-hat-wizard"></i> Метамагия</div>
+                        <div class="tag"><i class="fas fa-brain"></i> Концентрация</div>
+                        <div class="tag"><i class="fas fa-pray"></i> Жрец</div>
+                    </div>
+                    
+                    <div class="ability-details">
+                        <div class="prerequisites">
+                            <div class="prerequisites-header">
+                                <i class="prerequisites-icon fas fa-tasks"></i> Предварительные условия
+                            </div>
+                            <div>ранящая Божественная сила или исцеляющая Божественная сила</div>
+                        </div>
+                        
+                        <div class="ability-effect">
+                            <i class="fas fa-quote-left" style="color: #94a3b8; margin-right: 5px;"></i>
+                            В дополнение к исцелению, ваша вера дает временную защиту. Если ваше следующее действие - сотворять Исцеление / Закл. 1 или Нанесение ран / Закл. 1 выбрав целью 1 существо и цель восстанавливает ОЗ от заклинания, она еще получает бонус состояния +2 к КБ и спасброскам на 1 раунд.
+                            <i class="fas fa-quote-right" style="color: #94a3b8; margin-left: 5px;"></i>
+                        </div>
+                        
+                        <div class="benefits-list">
+                            <ul>
+                                <li>1 действие</li>
+                                <li>1 раунд</li>
+                                <li>+2 к КБ</li>
+                                <li>+2 Спасброски</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Быстрая энергия -->
+            <div class="ability-card">
+                <div class="ability-header" onclick="toggleAbility(this)">
+                    <div class="ability-title">
+                        <i class="ability-icon fas fa-bolt"></i> Быстрая энергия
+                    </div>
+                    <div class="ability-level">Черта 14</div>
+                </div>
+                
+                <div class="ability-expandable">
+                    <div class="ability-tags">
+                        <div class="tag"><i class="fas fa-pray"></i> Жрец</div>
+                    </div>
+                    
+                    <div class="ability-details">
+                        <div class="prerequisites">
+                            <div class="prerequisites-header">
+                                <i class="prerequisites-icon fas fa-tasks"></i> Предварительные условия
+                            </div>
+                            <div>ранящая Божественная сила или исцеляющая Божественная сила</div>
+                        </div>
+                        
+                        <div class="ability-effect">
+                            <i class="fas fa-quote-left" style="color: #94a3b8; margin-right: 5px;"></i>
+                            Божественная сила всегда рядом с вами и быстро откликается на зов. Когда вы сотворяете Исцеление / Закл. 1 или Нанесение ран / Закл. 1 тратя 2 действия (▶▶), вы можете получить эффекты версии за 3 действия.
+                            <i class="fas fa-quote-right" style="color: #94a3b8; margin-left: 5px;"></i>
+                        </div>
+                        
+                        <div class="ability-effect">
+                            <i class="fas fa-quote-left" style="color: #94a3b8; margin-right: 5px;"></i>
+                            Вы можете делать это с нанесением ран, если у вас есть ранящая божественная сила или с исцелением, если у вас есть исцеляющая божественная сила (или с обоими, если у вас есть Разносторонняя сила / 2).
+                            <i class="fas fa-quote-right" style="color: #94a3b8; margin-left: 5px;"></i>
+                        </div>
+                        
+                        <div class="benefits-list">
+                            <ul>
+                                <li>Уменьшение действий на Исцеление</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+            <!-- Вечное благословение (новый текст) -->
+            <div class="ability-card">
+                <div class="ability-header" onclick="toggleAbility(this)">
+                    <div class="ability-title">
+                        <i class="ability-icon fas fa-star"></i> Вечное благословение
+                    </div>
+                    <div class="ability-level">Черта 16</div>
+                </div>
+                
+                <div class="ability-expandable">
+                    <div class="ability-tags">
+                        <div class="tag"><i class="fas fa-pray"></i> Жрец</div>
+                        <div class="tag"><i class="fas fa-hand-holding-heart"></i> Благословение</div>
+                    </div>
+                    
+                    <div class="ability-details">
+                        <div class="prerequisites">
+                            <div class="prerequisites-header">
+                                <i class="prerequisites-icon fas fa-tasks"></i> Предварительные условия
+                            </div>
+                            <div>доброе мировоззрение</div>
+                        </div>
+                        
+                        <div class="ability-effect">
+                            <i class="fas fa-quote-left" style="color: #94a3b8; margin-right: 5px;"></i>
+                            Ваши добрые дела навечно принесли благодать вашего божества. Вы постоянно окружены заклинанием <span class="highlight">Благословение</span> 1-го уровня равного половине вашего уровня (округленного до большего целого). Радиус 15 футов, и вы не можете увеличить его. Вы можете Развеять это заклинание; если вы это делаете, оно автоматически возвращается через 1 минуту.
+                            <i class="fas fa-quote-right" style="color: #94a3b8; margin-left: 5px;"></i>
+                        </div>
+                        
+                        <div class="feature-block">
+                            <div class="feature-title">Особенности:</div>
+                            <ul style="list-style-type: none; padding-left: 0;">
+                                <li><i class="fas fa-check-circle" style="color: #5f6caf; margin-right: 8px;"></i>Постоянный эффект (концентрация не требуется)</li>
+                                <li><i class="fas fa-check-circle" style="color: #5f6caf; margin-right: 8px;"></i>Длительность: Пока не рассеяно</li>
+                                <li><i class="fas fa-check-circle" style="color: #5f6caf; margin-right: 8px;"></i>Диапазон: 15 футов (не расширяется)</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="benefits-list">
+                            <ul>
+                                <li>Союзники в радиусе получают +1 к броскам атаки</li>
+                                <li>Союзники в радиусе получают +2 к спасброскам от страха</li>
+                                <li>Возвращается через 1 минуту после рассеивания</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+    <script>
+        function toggleAbility(element) {
+            const expandable = element.parentElement.querySelector('.ability-expandable');
+            expandable.classList.toggle('expanded');
+        }
+    </script>
+</body>
+</html>
+
+<style>
+
+</style>
+<script>
+
+</script>
