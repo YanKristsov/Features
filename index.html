@@ -22,10 +22,10 @@
             flex-direction: column;
             align-items: center;
             min-height: 100vh;
-            font-size: 14px; /* уменьшенный базовый шрифт для всего контента */
+            font-size: 14px;
         }
         
-        /* Главный заголовок увеличен в 2 раза от базового (14*2 = 28, но сделаем 32px для наглядности) */
+        /* Главный заголовок увеличен в 2 раза */
         h1 {
             font-size: 32px;
             font-weight: 600;
@@ -71,10 +71,10 @@
             padding: 5px 12px;
             border-radius: 16px;
             font-weight: 600;
-            font-size: 16px; /* чуть меньше чем заголовок, но больше основного текста */
+            font-size: 16px;
         }
         
-        /* Весь внутренний контент блоков — уменьшенный шрифт */
+        /* Все внутренности — уменьшенный шрифт */
         .ability-tags,
         .ability-details,
         .ability-effect,
@@ -99,17 +99,15 @@
             font-size: 14px;
         }
         
-        /* Но внутри .ability-effect могут быть цитаты, тоже 14px */
         .ability-effect i, .ability-effect span, .ability-effect div {
             font-size: inherit;
         }
         
-        /* Таблицы и ячейки */
         .results-table th, .results-table td {
             font-size: 14px;
         }
         
-        /* Теги внутри шапки не трогаем, они внутри ability-header? Нет, теги в ability-tags, они уже 14px */
+        /* Теги — увеличен отступ иконки от текста */
         .tag {
             padding: 5px 10px;
             border-radius: 16px;
@@ -120,14 +118,27 @@
             font-size: 14px;
         }
         
-        /* Иконки остаются прежнего размера */
+        .tag i {
+            margin-right: 8px;  /* было 5px — увеличил для лучшей читаемости */
+            font-size: 1.1em;
+        }
+        
+        /* Иконки в шапке блока */
         .ability-icon {
-            margin-right: 10px;
+            margin-right: 12px;
+            font-size: 1.3em;
+            color: #64748b;
+        }
+        
+        /* Иконки в реакциях, предпосылках и т.д. */
+        .reaction-icon,
+        .prerequisites-icon {
+            margin-right: 8px;
             font-size: 1.2em;
             color: #64748b;
         }
         
-        /* Остальные стили без изменений, только размеры шрифтов унифицированы */
+        /* Общие стили */
         .content-wrapper {
             width: 100%;
             max-width: 600px;
@@ -223,12 +234,6 @@
             font-weight: 600;
         }
         
-        .reaction-icon {
-            margin-right: 8px;
-            font-size: 1.2em;
-            color: #64748b;
-        }
-        
         .reaction-trigger, .reaction-effect {
             margin-bottom: 10px;
             padding-left: 26px;
@@ -291,12 +296,6 @@
             align-items: center;
             margin-bottom: 8px;
             font-weight: 600;
-        }
-        
-        .prerequisites-icon {
-            margin-right: 8px;
-            font-size: 1.2em;
-            color: #64748b;
         }
         
         .benefits-list {
@@ -781,7 +780,7 @@
                             Вы указываете на подробность, которая неопровержимо поддерживает вашу веру, заставляя разум слушателя идти кругом. Сделайте проверку Дипломатии и сравните результат с КС Воли одной цели.
                             <i class="fas fa-quote-right" style="color: #94a3b8; margin-left: 5px;"></i>
                         </div>
-                        <table class="results-table"><thead><tr><th>Результат</th><th>Эффект</th></tr></thead><tbody><tr><td><b>Критический успех</b></td><td>Одурманен 2 на 1 раунд</td></tr><tr><td><b>Успех</b></td><td>Одурманен 1 на 1 раунд</td></tr><tr><td><b>Провал</b></td><td>Невредима</td></tr></tbody></table>
+                        <table class="results-table"><thead><tr><th>Результат</th><th>Эффект</th></tr></thead><tbody><tr><td><b>Критический успех</b></td><td>Одурманен 2 на 1 раунд</div></div></tr><tr><td><b>Успех</b></div><td>Одурманен 1 на 1 раунд</div></div></tr><tr><td><b>Провал</b></div><td>Невредима</div></div></tr></tbody></table>
                         <div class="benefits-list"><ul><li>КС Воли к Дипломатии</li><li>Иммунитет 1 день</li><li>Одурманен 2/1/невредима</li></ul></div>
                     </div>
                 </div>
@@ -812,7 +811,6 @@
     </div>
 
     <script>
-        // Функция для сохранения состояния всех блоков
         function saveAllStates() {
             const cards = document.querySelectorAll('.ability-card');
             const states = {};
@@ -827,7 +825,6 @@
             localStorage.setItem('abilityStates', JSON.stringify(states));
         }
 
-        // Функция загрузки состояний и применения
         function loadAndApplyStates() {
             const saved = localStorage.getItem('abilityStates');
             let states = {};
@@ -842,7 +839,7 @@
                 const expandable = card.querySelector('.ability-expandable');
                 if (!expandable) return;
                 const id = card.getAttribute('data-ability-id');
-                let shouldBeExpanded = true; // по умолчанию открыто
+                let shouldBeExpanded = true;
                 if (hasAnyState && id !== null && states.hasOwnProperty(id)) {
                     shouldBeExpanded = states[id];
                 }
@@ -855,7 +852,6 @@
             saveAllStates();
         }
 
-        // Функция переключения отдельного блока
         window.toggleAbility = function(headerElement) {
             const card = headerElement.closest('.ability-card');
             if (!card) return;
