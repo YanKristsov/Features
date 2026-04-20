@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -25,12 +24,16 @@
             min-height: 100vh;
         }
         
+        .content-wrapper {
+            width: 100%;
+            max-width: 600px;
+        }
+        
         header {
             margin-bottom: 25px;
             padding-bottom: 15px;
             text-align: center;
             width: 100%;
-            max-width: 600px;
         }
         
         h1 {
@@ -49,13 +52,11 @@
             padding-bottom: 8px;
             border-bottom: 2px solid #cbd5e1;
             width: 100%;
-            max-width: 600px;
             text-align: left;
         }
         
         .abilities-container {
             width: 100%;
-            max-width: 600px;
         }
         
         .ability-card {
@@ -66,6 +67,7 @@
             overflow: hidden;
             border-left: 4px solid #94a3b8;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            width: 100%;
         }
         
         .ability-card:hover {
@@ -399,7 +401,7 @@
                     <div class="ability-level">Особая</div>
                 </div>
                 
-                <div class="ability-expandable">
+                <div class="ability-expandable expanded">
                     <div class="ability-tags">
                         <div class="tag"><i class="fas fa-eye"></i> Зрение</div>
                     </div>
@@ -422,7 +424,7 @@
                     <div class="ability-level">Родословная</div>
                 </div>
                 
-                <div class="ability-expandable">
+                <div class="ability-expandable expanded">
                     <div class="ability-tags">
                         <div class="tag"><i class="fas fa-redo"></i> Реакция</div>
                         <div class="tag"><i class="fas fa-calendar-day"></i> 1/день</div>
@@ -460,7 +462,7 @@
                     <div class="ability-level">Черта 1</div>
                 </div>
                 
-                <div class="ability-expandable">
+                <div class="ability-expandable expanded">
                     <div class="ability-tags">
                         <div class="tag"><i class="fas fa-dice"></i> Удача</div>
                         <div class="tag"><i class="fas fa-brain"></i> Ментальный</div>
@@ -499,7 +501,7 @@
                     <div class="ability-level">Черта 5</div>
                 </div>
                 
-                <div class="ability-expandable">
+                <div class="ability-expandable expanded">
                     <div class="ability-tags">
                         <div class="tag"><i class="fas fa-history"></i> Самсаранец</div>
                     </div>
@@ -532,7 +534,7 @@
                     <div class="ability-level">Черта 9</div>
                 </div>
                 
-                <div class="ability-expandable">
+                <div class="ability-expandable expanded">
                     <div class="ability-tags">
                         <div class="tag"><i class="fas fa-heartbeat"></i> Исцеление</div>
                         <div class="tag"><i class="fas fa-history"></i> Самсаранец</div>
@@ -568,7 +570,7 @@
                     <div class="ability-level">Черта 13</div>
                 </div>
                 
-                <div class="ability-expandable">
+                <div class="ability-expandable expanded">
                     <div class="ability-tags">
                         <div class="tag"><i class="fas fa-history"></i> Самсаранец</div>
                         <div class="tag"><i class="fas fa-tint"></i> Вода</div>
@@ -589,9 +591,8 @@
                     </div>
                 </div>
             </div>
-        </div>
 
-          <!-- И это пройдёт (новая черта) -->
+            <!-- И это пройдёт (новая черта) -->
             <div class="ability-card">
                 <div class="ability-header" onclick="toggleAbility(this)">
                     <div class="ability-title">
@@ -600,7 +601,7 @@
                     <div class="ability-level">Черта 17</div>
                 </div>
                 
-                <div class="ability-expandable">
+                <div class="ability-expandable expanded">
                     <div class="ability-tags">
                         <div class="tag"><i class="fas fa-history"></i> Самсаран</div>
                         <div class="tag"><i class="fas fa-redo-alt"></i> Удача</div>
@@ -640,8 +641,8 @@
             </div>
         </div>
 
-          <h2 class="section-title">ЧЕРТЫ НАВЫКОВ</h2>
-      <div class="abilities-container">
+        <h2 class="section-title">ЧЕРТЫ НАВЫКОВ</h2>
+        <div class="abilities-container">
             <!-- Мирской медик -->
             <div class="ability-card">
                 <div class="ability-header" onclick="toggleAbility(this)">
@@ -651,7 +652,7 @@
                     <div class="ability-level">Происхождение</div>
                 </div>
                 
-                <div class="ability-expandable">
+                <div class="ability-expandable expanded">
                     <div class="ability-tags">
                         <div class="tag"><i class="fas fa-briefcase-medical"></i> Медицина</div>
                         <div class="tag"><i class="fas fa-book-medical"></i> Анатомия</div>
@@ -691,7 +692,7 @@
                     <div class="ability-level">Уровень 2</div>
                 </div>
                 
-                <div class="ability-expandable">
+                <div class="ability-expandable expanded">
                     <div class="ability-tags">
                         <div class="tag"><i class="fas fa-globe"></i> Общая</div>
                         <div class="tag"><i class="fas fa-dumbbell"></i> Навык</div>
@@ -722,13 +723,22 @@
                 </div>
             </div>
 
-            <!-- Обучен навыку Атлетика -->
+            <!-- Обучен навыку Атлетика (исправлено: добавлен пустой expandable) -->
             <div class="ability-card">
                 <div class="ability-header" onclick="toggleAbility(this)">
                     <div class="ability-title">
                         <i class="ability-icon fas fa-dumbbell"></i> Обучен навыку Атлетика
                     </div>
                     <div class="ability-level">Уровень 4</div>
+                </div>
+                <div class="ability-expandable expanded">
+                    <div class="ability-details">
+                        <div class="ability-effect">
+                            <i class="fas fa-quote-left" style="color: #94a3b8; margin-right: 5px;"></i>
+                            Вы обучены навыку Атлетика.
+                            <i class="fas fa-quote-right" style="color: #94a3b8; margin-left: 5px;"></i>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -741,7 +751,7 @@
                     <div class="ability-level">Уровень 6</div>
                 </div>
                 
-                <div class="ability-expandable">
+                <div class="ability-expandable expanded">
                     <div class="ability-tags">
                         <div class="tag"><i class="fas fa-globe"></i> Общая</div>
                         <div class="tag"><i class="fas fa-pray"></i> Навык</div>
@@ -790,7 +800,7 @@
                     <div class="ability-level">Уровень 8</div>
                 </div>
                 
-                <div class="ability-expandable">
+                <div class="ability-expandable expanded">
                     <div class="ability-tags">
                         <div class="tag"><i class="fas fa-globe"></i> Общая</div>
                         <div class="tag"><i class="fas fa-acrobatics"></i> Навык</div>
@@ -828,7 +838,7 @@
                     <div class="ability-level">Уровень 10</div>
                 </div>
                 
-                <div class="ability-expandable">
+                <div class="ability-expandable expanded">
                     <div class="ability-tags">
                         <div class="tag"><i class="fas fa-globe"></i> Общая</div>
                         <div class="tag"><i class="fas fa-briefcase-medical"></i> Навык</div>
@@ -866,7 +876,7 @@
                     <div class="ability-level">Уровень 12</div>
                 </div>
                 
-                <div class="ability-expandable">
+                <div class="ability-expandable expanded">
                     <div class="ability-tags">
                         <div class="tag"><i class="fas fa-globe"></i> Общая</div>
                         <div class="tag"><i class="fas fa-pray"></i> Навык</div>
@@ -910,7 +920,7 @@
                     <div class="ability-level">Уровень 14</div>
                 </div>
                 
-                <div class="ability-expandable">
+                <div class="ability-expandable expanded">
                     <div class="ability-tags">
                         <div class="tag"><i class="fas fa-volume-up"></i> Слуховой</div>
                         <div class="tag"><i class="fas fa-language"></i> Языковой</div>
@@ -943,15 +953,15 @@
                             <tbody>
                                 <tr>
                                     <td><b>Критический успех</b></td>
-                                    <td>Цель получает состояние одурманен 2 на 1 раунд</td>
+                                    <td>Цель получает состояние одурманен 2 на 1 раунд</div>
                                 </tr>
                                 <tr>
-                                    <td><b>Успех</b></td>
-                                    <td>Цель получает состояние одурманен 1 на 1 раунд</td>
+                                    <td><b>Успех</b></div>
+                                    <td>Цель получает состояние одурманен 1 на 1 раунд</div>
                                 </tr>
                                 <tr>
-                                    <td><b>Провал</b></td>
-                                    <td>Цель невредима</td>
+                                    <td><b>Провал</b></div>
+                                    <td>Цель невредима</div>
                                 </tr>
                             </tbody>
                         </table>
@@ -967,11 +977,9 @@
                 </div>
             </div>
         </div>
-    </div>
-          <h2 class="section-title">ОБЩИЕ ЧЕРТЫ</h2>
 
-
-<div class="abilities-container">
+        <h2 class="section-title">ОБЩИЕ ЧЕРТЫ</h2>
+        <div class="abilities-container">
             <!-- Живучесть -->
             <div class="ability-card">
                 <div class="ability-header" onclick="toggleAbility(this)">
@@ -981,7 +989,7 @@
                     <div class="ability-level">Уровень 3</div>
                 </div>
                 
-                <div class="ability-expandable">
+                <div class="ability-expandable expanded">
                     <div class="ability-tags">
                         <div class="tag"><i class="fas fa-globe"></i> Общая</div>
                     </div>
@@ -1012,7 +1020,7 @@
                     <div class="ability-level">Уровень 7</div>
                 </div>
                 
-                <div class="ability-expandable">
+                <div class="ability-expandable expanded">
                     <div class="ability-tags">
                         <div class="tag"><i class="fas fa-globe"></i> Общая</div>
                     </div>
@@ -1042,7 +1050,7 @@
                     <div class="ability-level">Уровень 11</div>
                 </div>
                 
-                <div class="ability-expandable">
+                <div class="ability-expandable expanded">
                     <div class="ability-tags">
                         <div class="tag"><i class="fas fa-globe"></i> Общая</div>
                     </div>
@@ -1072,7 +1080,7 @@
                     <div class="ability-level">Уровень 13</div>
                 </div>
                 
-                <div class="ability-expandable">
+                <div class="ability-expandable expanded">
                     <div class="ability-tags">
                         <div class="tag"><i class="fas fa-globe"></i> Общая</div>
                     </div>
@@ -1101,11 +1109,8 @@
             </div>
         </div>
 
-
-
-          <h2 class="section-title">КЛАССОВЫЕ ЧЕРТЫ И ОСОБЕННОСТИ</h2>
-
-       <div class="abilities-container">
+        <h2 class="section-title">КЛАССОВЫЕ ЧЕРТЫ И ОСОБЕННОСТИ</h2>
+        <div class="abilities-container">
             <!-- Посвящение домену -->
             <div class="ability-card">
                 <div class="ability-header" onclick="toggleAbility(this)">
@@ -1115,7 +1120,7 @@
                     <div class="ability-level">Особенность</div>
                 </div>
                 
-                <div class="ability-expandable">
+                <div class="ability-expandable expanded">
                     <div class="ability-tags">
                         <div class="tag"><i class="fas fa-pray"></i> Жрец</div>
                     </div>
@@ -1162,7 +1167,7 @@
                     <div class="ability-level">Черта 1</div>
                 </div>
                 
-                <div class="ability-expandable">
+                <div class="ability-expandable expanded">
                     <div class="ability-tags">
                         <div class="tag"><i class="fas fa-pray"></i> Жрец</div>
                     </div>
@@ -1199,7 +1204,7 @@
                     <div class="ability-level">Черта 2</div>
                 </div>
                 
-                <div class="ability-expandable">
+                <div class="ability-expandable expanded">
                     <div class="ability-tags">
                         <div class="tag"><i class="fas fa-pray"></i> Жрец</div>
                     </div>
@@ -1239,7 +1244,7 @@
                     <div class="ability-level">Черта 4</div>
                 </div>
                 
-                <div class="ability-expandable">
+                <div class="ability-expandable expanded">
                     <div class="ability-tags">
                         <div class="tag"><i class="fas fa-pray"></i> Жрец</div>
                     </div>
@@ -1279,7 +1284,7 @@
                     <div class="ability-level">Черта 6</div>
                 </div>
                 
-                <div class="ability-expandable">
+                <div class="ability-expandable expanded">
                     <div class="ability-tags">
                         <div class="tag"><i class="fas fa-pray"></i> Жрец</div>
                     </div>
@@ -1316,7 +1321,7 @@
                     <div class="ability-level">Черта 8</div>
                 </div>
                 
-                <div class="ability-expandable">
+                <div class="ability-expandable expanded">
                     <div class="ability-tags">
                         <div class="tag"><i class="fas fa-pray"></i> Жрец</div>
                     </div>
@@ -1358,7 +1363,7 @@
                     <div class="ability-level">Черта 10</div>
                 </div>
                 
-                <div class="ability-expandable">
+                <div class="ability-expandable expanded">
                     <div class="ability-tags">
                         <div class="tag"><i class="fas fa-hat-wizard"></i> Метамагия</div>
                         <div class="tag"><i class="fas fa-brain"></i> Концентрация</div>
@@ -1409,7 +1414,7 @@
                     <div class="ability-level">Черта 12</div>
                 </div>
                 
-                <div class="ability-expandable">
+                <div class="ability-expandable expanded">
                     <div class="ability-tags">
                         <div class="tag"><i class="fas fa-hat-wizard"></i> Метамагия</div>
                         <div class="tag"><i class="fas fa-brain"></i> Концентрация</div>
@@ -1451,7 +1456,7 @@
                     <div class="ability-level">Черта 14</div>
                 </div>
                 
-                <div class="ability-expandable">
+                <div class="ability-expandable expanded">
                     <div class="ability-tags">
                         <div class="tag"><i class="fas fa-pray"></i> Жрец</div>
                     </div>
@@ -1484,8 +1489,8 @@
                     </div>
                 </div>
             </div>
-        </div>
-            <!-- Вечное благословение (новый текст) -->
+
+            <!-- Вечное благословение (перенесено внутрь контейнера) -->
             <div class="ability-card">
                 <div class="ability-header" onclick="toggleAbility(this)">
                     <div class="ability-title">
@@ -1494,7 +1499,7 @@
                     <div class="ability-level">Черта 16</div>
                 </div>
                 
-                <div class="ability-expandable">
+                <div class="ability-expandable expanded">
                     <div class="ability-tags">
                         <div class="tag"><i class="fas fa-pray"></i> Жрец</div>
                         <div class="tag"><i class="fas fa-hand-holding-heart"></i> Благословение</div>
@@ -1533,19 +1538,16 @@
                     </div>
                 </div>
             </div>
-            
+        </div>
+    </div>
+
     <script>
         function toggleAbility(element) {
             const expandable = element.parentElement.querySelector('.ability-expandable');
-            expandable.classList.toggle('expanded');
+            if (expandable) {
+                expandable.classList.toggle('expanded');
+            }
         }
     </script>
 </body>
 </html>
-
-<style>
-
-</style>
-<script>
-
-</script>
